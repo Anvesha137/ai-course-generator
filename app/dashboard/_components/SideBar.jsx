@@ -7,7 +7,7 @@ import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
 import { HiOutlineShieldCheck } from "react-icons/hi2";
 import { HiOutlinePower } from "react-icons/hi2";
 import { usePathname } from 'next/navigation';
-// import { Progress } from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";
 
 
 const SideBar = () => {
@@ -59,7 +59,7 @@ const SideBar = () => {
             </ul>
 
             <div className='absolute bottom-10 w-[80%]'>
-            {/* <Progress value={33} /> */}
+            <Progress value={33} />
             <h2 className='text-sm my-2'> 3 Out of 5 Course Created</h2>
             <h2 className='text-xs text-gray-500'>Upgrade Your PLan for Unlimited Course Generation</h2>
             </div>
