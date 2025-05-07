@@ -13,7 +13,9 @@ Customizable course topics and difficulty levels
 Installation
 
 git clone https://github.com/yourusername/ai-course-generator.git
+
 cd ai-course-generator
+
 pip install -r requirements.txt
 
 
