@@ -1,10 +1,13 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiMiniSquares2X2, HiLightBulb, HiClipboardDocumentCheck } from "react-icons/hi2";
 import { Button } from '@/components/ui/button'
 import SelectCategory from './_components/SelectCategory';
+import TopicDescription from './_components/TopicDescription';
+import SelectOption from './_components/SelectOption';
+import { UserInputContext } from '@/app/_context/UserInputContext';
 
-const CreateCourse = () => {
+function CreateCourse() {
   const StepperOptions = [
     {
       id: 1,
@@ -22,9 +25,35 @@ const CreateCourse = () => {
       icon: <HiClipboardDocumentCheck />
     }
   ]
+  const { userCourseInput, setUserCourseInput } = React.useContext(UserInputContext)
 
   const [activeIndex, setActiveIndex] = useState(0);
 
+  useEffect(()=>{
+    console.log(userCourseInput);
+  },[userCourseInput])
+
+  // used for next button enable or not
+  const checkStatus = () => {
+    if (!userCourseInput || Object.keys(userCourseInput).length === 0) {
+      return true;
+    }
+    if(activeIndex == 0 && (userCourseInput?.category?.length==0|| userCourseInput?.category ==undefined)){
+      return true;
+    }
+    if(activeIndex == 1 && (userCourseInput?.topic?.length==0|| userCourseInput?.topic ==undefined)){
+      return true;
+    }
+    else if(activeIndex == 2 && (
+      !userCourseInput?.Level || 
+      !userCourseInput?.Duration || 
+      userCourseInput?.DisplayVideo === undefined || 
+      !userCourseInput?.NoOfchapter == undefined 
+    )) {
+      return true;
+    }
+    return false;
+  }
   return (
     <div>
       {/* Stepper */}
@@ -50,9 +79,9 @@ const CreateCourse = () => {
 
       <div className='px-10 md:px-20 lg:px-44 mt-10'>
         {/* Components */}
-        {activeIndex== 0?<SelectCategory/>:null}
-
-
+        {activeIndex == 0 ? <SelectCategory /> :
+          activeIndex == 1 ? <TopicDescription /> :
+            <SelectOption />}
 
         {/* Next Previous Button */}
         <div className='flex justify-between mt-10'>
@@ -60,12 +89,12 @@ const CreateCourse = () => {
             disabled={activeIndex == 0}
             onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
             style={{ backgroundColor: 'oklch(45.7% .24 277.023)', cursor: 'pointer' }}
-          >
-            Previous
+          >Previous
           </Button>
 
           {activeIndex < 2 && (
             <Button
+              disabled={checkStatus()}
               onClick={() => setActiveIndex((prev) => Math.min(prev + 1, StepperOptions.length - 1))}
               style={{ backgroundColor: 'oklch(45.7% .24 277.023)', cursor: 'pointer' }}
             >
@@ -75,6 +104,7 @@ const CreateCourse = () => {
 
           {activeIndex == 2 && (
             <Button
+              disabled={checkStatus()}
               onClick={() => setActiveIndex((prev) => Math.min(prev + 1, StepperOptions.length - 1))}
               style={{ backgroundColor: 'oklch(45.7% .24 277.023)', cursor: 'pointer' }}
             >

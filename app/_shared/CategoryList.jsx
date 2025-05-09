@@ -9,7 +9,7 @@ export default [
     },
     {
         id:2,
-        name: 'Heal',
+        name: 'Health',
         icons:'/lotus.png',
         prompt: 'Write a course on health'
     },{
