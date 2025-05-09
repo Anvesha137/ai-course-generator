@@ -77,8 +77,9 @@ function SelectOption() {
                     <Input
                         type="number"
                         className="h-9 text-lg"
-                        defaultValue={userCourseInput?.NoOfChaters}
-                        onChange={(event) => handleInputChange('NoOfChaters', event.target.value)}
+                        defaultValue={userCourseInput?.NoOfChapters}
+                        onChange={(event) => handleInputChange('NoOfChapters', Number(event.target.value))}
+                        min="1"  // Ensure at least 1 chapter
                     />
                 </div>
             </div>

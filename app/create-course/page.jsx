@@ -25,37 +25,55 @@ function CreateCourse() {
       icon: <HiClipboardDocumentCheck />
     }
   ]
-  const { userCourseInput, setUserCourseInput } = React.useContext(UserInputContext)
+  const { userCourseInput } = React.useContext(UserInputContext);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(()=>{
-    console.log(userCourseInput);
-  },[userCourseInput])
+  useEffect(() => {
+    console.log('Current state:', {
+      Level: userCourseInput?.Level,
+      Duration: userCourseInput?.Duration,
+      DisplayVideo: userCourseInput?.DisplayVideo,
+      NoOfChapters: userCourseInput?.NoOfChapters,
+      isValid: !checkStatus()
+    });
+  }, [userCourseInput]);
 
   // used for next button enable or not
-  const checkStatus = () => {
-    if (!userCourseInput || Object.keys(userCourseInput).length === 0) {
+const checkStatus = () => {
+  // Step 1: Check if userCourseInput exists
+  if (!userCourseInput) return true;
+
+  // Step 2: Validate based on active step
+  switch (activeIndex) {
+    case 0: // Category step
+      return !userCourseInput.category;
+    case 1: // Topic step
+      return !userCourseInput.topic;
+    case 2: // Options step
+      return (
+        !userCourseInput.Level ||
+        !userCourseInput.Duration ||
+        userCourseInput.DisplayVideo === undefined ||
+        !userCourseInput.NoOfChapters ||
+        userCourseInput.NoOfChapters < 1
+      );
+    default:
       return true;
-    }
-    if(activeIndex == 0 && (userCourseInput?.category?.length==0|| userCourseInput?.category ==undefined)){
-      return true;
-    }
-    if(activeIndex == 1 && (userCourseInput?.topic?.length==0|| userCourseInput?.topic ==undefined)){
-      return true;
-    }
-    else if(activeIndex == 2 && (
-      !userCourseInput?.Level || 
-      !userCourseInput?.Duration || 
-      userCourseInput?.DisplayVideo === undefined || 
-      !userCourseInput?.NoOfchapter == undefined 
-    )) {
-      return true;
-    }
-    return false;
   }
+};
+
+const GenerateCourseLayout = () => {
+  const BASIC_PROMPT = 'Generate A Course Tutorial on Following Detail With field as Course Name, Description, Along with Chapter Name, about, Duration: ';
+  const USER_INPUT_PROMPT = `Category: ${userCourseInput?.category}, Topic: ${userCourseInput?.topic}, Level: ${userCourseInput?.Level}, Duration: ${userCourseInput?.Duration}, NoOf Chapters: ${userCourseInput?.NoOfChapters}, in JSON format`;
+  const FINAL_PROMPT = BASIC_PROMPT + USER_INPUT_PROMPT;
+  console.log(FINAL_PROMPT);
+}
   return (
     <div>
+
+
+
       {/* Stepper */}
       <div className='flex flex-col justify-between items-center mt-10'>
         <h2 className='text-4xl font-medium' style={{ color: 'oklch(45.7% .24 277.023)' }}>Create Course</h2>
@@ -105,7 +123,7 @@ function CreateCourse() {
           {activeIndex == 2 && (
             <Button
               disabled={checkStatus()}
-              onClick={() => setActiveIndex((prev) => Math.min(prev + 1, StepperOptions.length - 1))}
+              onClick={() => GenerateCourseLayout()}
               style={{ backgroundColor: 'oklch(45.7% .24 277.023)', cursor: 'pointer' }}
             >
               Generate Course Layout
@@ -116,5 +134,4 @@ function CreateCourse() {
     </div>
   )
 }
-
-export default CreateCourse
+export default CreateCourse;
