@@ -1,69 +1,42 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
-const apiKey = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(apiKey);
+const apikey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apikey);//check MEEEEE
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-});
+model: "gemini-1.5-flash",
+}); 
 
 const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
-    topK: 64,
-    maxOutputTokens: 8192,
-    responseMimeType: "application/json",
+temperature: 1,
+topP: 0.95,
+topK: 64,
+maxOutputTokens: 8192,
+responseMimeType: "application/json",
 };
 
-export const GenerateCourseLayout = async () => {
-    const response = await model.startChat({
-        generationConfig,
-        history: [
-            {
-                role: "user",
-                parts: [
-                    {
-                        text: "Generate A Course Tutorial on Following Detail With field as Course Name, Description, Along with Chapter Name, about, Duration: ",
-                    },
-                ],
-            },
-            {
-                role: "model",
-                parts: [
-                    {
-                        text: JSON.stringify({
-                            course: {
-                                name: "Introduction",
-                                description: "Course Description",
-                                category: "Category",
-                                sub_category: "Sub Category",
-                                level: "Beginner",
-                                language: "English",
-                                duration: 10,
-                                price: 0,
-                                image_url: "https://example.com/image.jpg",
-                                video_url: "https://example.com/video.mp4",
-                            },
-                            lessons: [
-                                {
-                                    name: "Lesson 1",
-                                    description: "Lesson 1 Description",
-                                    duration: 5,
-                                    content_url: "https://example.com/lesson1.mp4",
-                                },
-                                {
-                                    name: "Lesson 2",
-                                    description: "Lesson 2 Description",
-                                    duration: 5,
-                                    content_url: "https://example.com/lesson2.mp4",
-                                },
-                            ],
-                        }),
-                    },
-                ],
-            },
-        ],
-    });
 
-    return response;
-};
+export const GenerateCourseLayout_AI = model. startChat({
+generationConfig,
+history:[
+  {
+    role: "user",
+parts:[
+  {
+    text: "Generate A Course Tutorial on Following Detail With field Course Name, Description, Along with Chapter Name, about, Duration: Category: 'Programming', Topic: Python, Level:Basic, Duration:1 hours, NoOf Chapters:5, in JSON format",
+  }
+],
+  },
+  {
+    role: "model",
+    parts: [
+      {
+        text: "```json\n{\n  \"course\": {\n    \"course\": {\"Introduction to Python Programming\",\n    \"description\": \"A comprehensive course designed for beginners to learn the fundamentals of Python programming.\",\n    \"details\": {\n      \"category\": \"Programming\",\n      \"level\": \"Basic\",\n      \"duration\": \"1 hour\",\n      \"chapters\": 5,\n      \"hasVideos\": false\n    },\n    \"chapters\": [\n      {\n        \"number\": 1,\n        \"title\": \"Getting Started with Python\",\n        \"description\": \"Introduction to Python, installation, and setup.\",\n        \"duration\": \"10 minutes\",\n        \"content\": \"In this chapter, we will cover the basics of Python, how to install it, and set up your development environment.\"\n      },\n      {\n        \"number\": 2,\n        \"title\": \"Variables and Data Types\",\n        \"description\": \"Understanding variables and different data types in Python.\",\n        \"duration\": \"15 minutes\",\n        \"content\": \"This chapter will introduce you to variables, data types, and how to use them in Python.\"\n      },\n      {\n        \"number\": 3,\n        \"title\": \"Control Structures\",\n        \"description\": \"Learn about if statements, loops, and control flow in Python.\",\n        \"duration\": \"15 minutes\",\n        \"content\": \"In this chapter, we will explore control structures like if statements and loops.\"\n      },\n      {\n        \"number\": 4,\n        \"title\": \"Functions and Modules\",\n        \"description\": \"Creating and using functions and modules in Python.\",\n        \"duration\": \"10 minutes\",\n        \"content\": \"This chapter will teach you how to create functions and use modules in your Python programs.\"\n      },\n      {\n        \"number\": 5,\n        \"title\": \"Conclusion and Next Steps\",\n        \"description\": \"Wrap up the course and discuss next steps for learning Python.\",\n        \"duration\": \"10 minutes\",\n        \"content\": \"In this final chapter, we will summarize what you've learned and suggest next steps for further learning.\"\n      }\n    ]\n  }\n}\n```\"\n"
+  }
+],
+}
+],
+});
+
+// const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
+// console.log(result.response.text());
