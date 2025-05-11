@@ -7,6 +7,7 @@ import TopicDescription from './_components/TopicDescription';
 import SelectOption from './_components/SelectOption';
 import { UserInputContext } from '@/app/_context/UserInputContext';
 import {GenerateCourseLayout_AI} from '@/config/AiModel';
+import LoadingDialog from './_components/LoadingDialog';
 
 function CreateCourse() {
   const StepperOptions = [
@@ -139,6 +140,7 @@ const GenerateCourseLayout = async() => {
           )}
         </div>
       </div>
+      <LoadingDialog loading={loading}  />
     </div>
   )
 }

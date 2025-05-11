@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
 const apikey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(apikey);//check MEEEEE
+const genAI = new GoogleGenerativeAI(apikey);
 
 const model = genAI.getGenerativeModel({
 model: "gemini-1.5-flash",
