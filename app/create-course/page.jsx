@@ -8,6 +8,11 @@ import SelectOption from './_components/SelectOption';
 import { UserInputContext } from '@/app/_context/UserInputContext';
 import {GenerateCourseLayout_AI} from '@/config/AiModel';
 import LoadingDialog from './_components/LoadingDialog';
+import { db } from '@/config/db';
+import { CourseList } from '@/config/schema';
+import { v4 as uuid4 } from 'uuid';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 function CreateCourse() {
   const StepperOptions = [
@@ -30,6 +35,8 @@ function CreateCourse() {
   const { userCourseInput } = React.useContext(UserInputContext);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const {user}=useUser();
+  const router=useRouter();
 
   useEffect(() => {
     console.log('Current state:', {
@@ -75,8 +82,28 @@ const GenerateCourseLayout = async() => {
   console.log(result.response?.text()); 
   console.log(JSON.parse(result.response?.text()));
   setLoading(false);
+  SaveCourseLayoutInDb(JSON.parse(result.response?.text()));
 }
 
+const SaveCourseLayoutInDb = async(courseLayout)=>{
+  var id = uuid4();
+  setLoading(true);
+  const result = await db.insert(CourseList).values({
+    courseId:id,
+    name: userCourseInput?.topic,
+    level: userCourseInput?.Level,
+    category: userCourseInput?.category,
+    // duration: userCourseInput?.Duration,
+    courseOutput: courseLayout,
+    createdBy:user?.primaryEmailAddress?.emailAddress,
+    userName:user?.fullName,
+    userProfileImage:user?.imageUrl
+  })
+
+  console.log("Finish")
+  setLoading(false);
+  router.replace('/create-course/'+id);
+}
 
   return (
     <div>
