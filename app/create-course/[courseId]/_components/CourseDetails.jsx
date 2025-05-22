@@ -16,14 +16,14 @@ const CourseDetails = ({ course }) => {
           <HiOutlineClock   className="text-4xl text-primary" />
           <div>
             <h2 className="text-xs text-gray-500">Duration</h2>
-            <h2 className="font-medium text-lg">{course?.courseOutput?.course?.duration}</h2>
+            <h2 className="font-medium text-lg">{course?.courseOutput?.Duration}</h2>
           </div>
         </div>
         <div className="flex gap-2 items-center" >
           <HiOutlineBookOpen  className="text-4xl text-primary" />
           <div>
             <h2 className="text-xs text-gray-500">No of Chapters</h2>
-            <h2 className="font-medium text-lg">{course?.courseOutput?.course?.noOfChapters}</h2>
+            <h2 className="font-medium text-lg">{course?.courseOutput?.NoOfChapters}</h2>
           </div>
         </div>
         <div className="flex gap-2 items-center">

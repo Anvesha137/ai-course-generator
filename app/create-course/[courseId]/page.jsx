@@ -58,7 +58,7 @@ const CourseLayout = ({ params }) => {
       const PROMPT = `Explain the concept in detail on Topic: ${course?.name}, Chapter: ${Chapter?.ChapterName} in JSON format with a list of arrays with fields as title, description in detail, CodeExample (Code field in <precode> Code format) if applicable.`;
       console.log(PROMPT);
  
-      if (index < 3) {
+      if (index < chapters.length) {
         try {
           // Generate video
           let videoId = null;

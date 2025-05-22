@@ -20,16 +20,15 @@ function EditChapters  ({course,index, refreshData})   {
     },[course])
     const onUpdateHandler=async()=>{
 
-      course.courseOutput.course.Chapters[index].ChapterName=ChapterName;
-      course.courseOutput.course.Chapters[index].About=About;
+      course.courseOutput.Chapters[index].ChapterName=ChapterName;
+      course.courseOutput.Chapters[index].About=About;
 
       const result = await db.update(CourseList).set({
                   courseOutput: course?.courseOutput
               }).where(eq(CourseList?.id,course?.id))
               .returning({id:CourseList.id})
-
               refreshData(true);
-            
+              
     }
   return (
     <Dialog>

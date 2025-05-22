@@ -77,7 +77,7 @@ const GenerateCourseLayout = async() => {
   const BASIC_PROMPT = 'Generate A Course Tutorial on Following Detail With field as Course Name, Description, Along with Chapter Name, about, Duration: ';
   const USER_INPUT_PROMPT = 'Category: '+ userCourseInput?.category + ', Topic: ' + userCourseInput?.topic + ', Level: ' + userCourseInput?.Level + ', Duration: ' + userCourseInput?.Duration + ', NoOfChapters: ' + userCourseInput?.NoOfChapters + ', in JSON format';
   const FINAL_PROMPT = BASIC_PROMPT + USER_INPUT_PROMPT;
-  console.log(FINAL_PROMPT);
+  console.log('final',FINAL_PROMPT);
   const result= await GenerateCourseLayout_AI.sendMessage(FINAL_PROMPT);
   console.log(result.response?.text()); 
   console.log(JSON.parse(result.response?.text()));

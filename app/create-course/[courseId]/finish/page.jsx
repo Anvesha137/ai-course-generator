@@ -28,7 +28,7 @@ function FinishScreen({params}) {
         <h2 className='text-center font-bold text-2xl my-3 text-primary'>Congrats! Your course is Ready</h2>
        
        
-        <CourseBasicInfo course={course} refreshData={()=>console.log()} />
+        <CourseBasicInfo course={course} refreshData={()=>GetCourse()} />
        <h2 className='mt-3'>Course URL:</h2>
        <h2 className='text-center text-gray-400 
        border p-2 round flex gap-5 items-center'>{process.env.NEXT_PUBLIC_HOST_NAME}/course/{course?.courseId} 

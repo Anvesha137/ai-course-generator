@@ -32,7 +32,7 @@ function Course({params}) {
 
         <CourseDetails course={course} />
 
-        <ChapterList course={course}  edit={false}/>
+        <ChapterList refreshData={()=>GetCourse()} course={course}  edit={false}/>
         </div>
     </div>
   )

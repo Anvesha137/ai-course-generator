@@ -25,13 +25,13 @@ function EditCOurseBasicInfor  ({course, refreshData}) {
 
 
      useEffect(() => {
-        setCourseName(course?.courseOutput?.course?.CourseName || '');
-        setDescription(course?.courseOutput?.course?.Description || '');
+        setCourseName(course?.courseOutput?.CourseName || '');
+        setDescription(course?.courseOutput?.Description || '');
     }, [course]);
     
     const onUpdateHandler= async()=>{
-        course.courseOutput.course.CourseName=CourseName;
-        course.courseOutput.course.Description=Description;
+        course.courseOutput.CourseName=CourseName;
+        course.courseOutput.Description=Description;
         const result = await db.update(CourseList).set({
             courseOutput: course?.courseOutput
         }).where(eq(CourseList?.id,course?.id))
@@ -49,14 +49,14 @@ function EditCOurseBasicInfor  ({course, refreshData}) {
       <DialogDescription>
         <div className='mt-3'>
             <label >Course Title</label>
-            <Input defaultValue={course?.courseOutput?.course?.CourseName || course?.name}
+            <Input defaultValue={course?.courseOutput?.CourseName || course?.name}
             onChange={(event)=>setCourseName(event?.target.value)}
             />
 
         </div>
         <div>
             <label >Course Description</label>
-            <Textarea defaultValue={course?.courseOutput?.course?.Description} 
+            <Textarea defaultValue={course?.courseOutput?.Description} 
             onChange={(event)=>setDescription(event?.target.value)}/>
         </div>
       </DialogDescription>
