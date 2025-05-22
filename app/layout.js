@@ -1,12 +1,10 @@
-import { Geist, Geist_Mono,Outfit,Rubik} from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
-
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Outfit({
   subsets: ["latin"],
 });
-
 
 export const metadata = {
   title: "Create Next App",
@@ -16,12 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <GoogleOneTap />
-      <body className={ geistSans.className }>
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+        <body className={geistSans.className}>
+          {children}
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
