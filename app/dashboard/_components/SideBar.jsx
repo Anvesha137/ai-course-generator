@@ -1,70 +1,77 @@
-"use client"
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link';
-import { HiOutlineHome } from "react-icons/hi2";
-import { HiOutlineSquare3Stack3D } from "react-icons/hi2";
-import { HiOutlineShieldCheck } from "react-icons/hi2";
-import { HiOutlinePower } from "react-icons/hi2";
+"use client";
+import Image from 'next/image';
+import React, { useContext } from 'react';
+import { HiHome } from "react-icons/hi2";
+import { MdOutlineExplore } from "react-icons/md";
+import { GrUpgrade } from "react-icons/gr";
+import { TbLogout2 } from "react-icons/tb";
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { Progress } from "@/components/ui/progress";
-
+import { UserCourseListContext } from '@/app/_context/UserCourseListContext';
+// import { BsFillSuitcaseLgFill } from "react-icons/bs";
 
 const SideBar = () => {
-    const Menu = [
-        {
-            id: 1,
-            name: 'Home',
-            icon: <HiOutlineHome />,
-            path: "/dashboard"
-        },
-        {
-            id: 1,
-            name: 'Explore',
-            icon: <HiOutlineSquare3Stack3D />,
-            path: "/dashboard/explore"
-        },
-        {
-            id: 1,
-            name: 'Upgrade',
-            icon: <HiOutlineShieldCheck />,
-            path: "/dashboard/upgrade"
-        },
-        {
-            id: 1,
-            name: 'Logout',
-            icon: <HiOutlinePower />,
-            path: "/dashboard/logout"
-        }
+  const { userCourseList } = useContext(UserCourseListContext);
 
-    ]
-    const path = usePathname();
-    return (
-        <div className='fixed h-full md:w-64 p-5 shadow-lg'>
-            <Image src='/name.png' width={160} height={100} />
-            <hr className='my-5' />
+  const Menu = [
+    {
+      id: 1,
+      name: 'Home',
+      icon: <HiHome />,
+      path: '/dashboard',
+    },
+    {
+      id: 2,
+      name: 'Explore',
+      icon: <MdOutlineExplore />,
+      path: '/dashboard/explore',
+    },
+    {
+      id: 3,
+      name: 'Upgrade',
+      icon: <GrUpgrade />,
+      path: '/dashboard/upgrade',
+    },
+    {
+      id: 5,
+      name: 'Logout',
+      icon: <TbLogout2 />,
+      path: '/dashboard/logout',
+    },
+  ];
 
+  const path = usePathname();
 
-            <ul>
-                {Menu.map((item, index) => (
-                    <Link href={item.path}>
-                        <div className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3
-                        ${item.path === path ? "bg-gray-100 text-black" : ""
-                            }`}>
-                            <div className='text-2xl'>{item.icon}</div>
-                            <h2>{item.name}</h2>
-                        </div>
-                    </Link>
-                ))}
-            </ul>
+  return (
+    <div className="fixed h-full md:w-64 p-5 shadow-md">
+      <Image alt="placeholder"  src={'/sLOGO.png'} width={160} height={100} />
+      <hr className="my-5" />
+      <ul>
+        {Menu.map((item) => (
+          <li key={item.id}>
+            <Link href={item.path}>
+              <div
+                className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${
+                  item.path === path && 'bg-gray-100 text-black'
+                }`}
+              >
+                <div className="text-2xl">{item.icon}</div>
+                <h2>{item.name}</h2>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className="absolute bottom-10 w-[80%]">
+        <Progress value={(userCourseList?.length / 5) * 100} />
+        <h2 className="text-sm my-2">{userCourseList?.length} out of 5 created</h2>
+        <h2 className="text-xs text-gray-500">
+          Upgrade your plan for unlimited course generation
+        </h2>
+      </div>
+    </div>
+  );
+};
 
-            <div className='absolute bottom-10 w-[80%]'>
-            <Progress value={33} />
-            <h2 className='text-sm my-2'> 3 Out of 5 Course Created</h2>
-            <h2 className='text-xs text-gray-500'>Upgrade Your PLan for Unlimited Course Generation</h2>
-            </div>
-        </div>
-    )
-}
-
-export default SideBar
+export default SideBar;

@@ -12,8 +12,8 @@ export default function Page() {
       
       {/* Optional text overlay */}
       <div className="absolute bottom-10 left-10 text-white z-10">
-        <h2 className="text-4xl font-bold mb-2">Quit La Bespoke</h2>
-        <p className="text-xl">Fast data apps with code</p>
+        <h2 className="text-4xl font-bold mb-2">KnowVal</h2>
+        <p className="text-xl">MiileStone 1 </p>
       </div>
     </div>
 
