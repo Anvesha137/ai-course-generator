@@ -14,7 +14,7 @@ export const CourseList = pgTable('CourseList', {
     courseBanner:varchar('courseBanner').default('/placeholder.png'),
     publish:boolean('public').default('false')
 })
-
+    
 
 export const Chapters=pgTable('chapters',{
     id:serial('id').primaryKey(),

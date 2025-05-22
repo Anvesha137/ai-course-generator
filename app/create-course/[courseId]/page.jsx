@@ -55,7 +55,7 @@ const CourseLayout = ({ params }) => {
       const Chapter = chapters[index];
       
 
-      const PROMPT = `Explain the concept in detail on Topic: ${course?.name}, Chapter: ${Chapter?.ChapterName} in JSON format with a list of arrays with fields as title, description in detail, CodeExample (Code field in <precode> Code format) if applicable.`;
+      const PROMPT = `Explain the concept in detail on Topic: ${course?.name}, Chapter: ${Chapter?.ChapterName} in JSON format as follows:\n{\n  \"Topic\": \"${course?.name}\",\n  \"Chapter\": \"${Chapter?.ChapterName}\",\n  \"Details\": [\n    {\n      \"title\": \"...\",\n      \"description\": \"...\",\n      \"CodeExample\": null or \"<precode>...code...</precode>\"\n    },\n    ...\n  ]\n}`;
       console.log(PROMPT);
  
       if (index < chapters.length) {
