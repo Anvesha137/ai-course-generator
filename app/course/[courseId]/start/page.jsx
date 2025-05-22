@@ -16,7 +16,7 @@ function CourseStart({ params }) {
   }, []);
 
   useEffect(() => {
-    GetSelectedChapterContent(0);
+    GetSelectedChapterContent(selectedChapter);
   }, [course]);
 
   /**
@@ -44,7 +44,12 @@ function CourseStart({ params }) {
 
     setChapterContent(result[0]);
     console.log(result);
+    
   };
+
+  console.log("Selected Chapter", selectedChapter);
+  console.log("Course", course);
+  console.log("Chapter Content", chapterContent);
 
   return (
     <div>
@@ -63,10 +68,10 @@ function CourseStart({ params }) {
               key={index}
               className={`cursor-pointer
                     hover:bg-purple-50
-                    ${selectedChapter?.ChapterName == chapter?.ChapterName && "bg-purple-100"}
+                    ${selectedChapter === index && "bg-purple-100"}
                     `}
               onClick={() => {
-                setSelectedChapter(chapter);
+                setSelectedChapter(index);
                 GetSelectedChapterContent(index);
               }}
             >

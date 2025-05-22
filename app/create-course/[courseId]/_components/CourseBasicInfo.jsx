@@ -57,10 +57,10 @@ function CourseBasicInfo({course,refreshData,edit=true}) {
                {edit && <EditCOurseBasicInfor course={course} refreshData={()=>refreshData(true)} />} </h2>
                 <p className='text-sm text-gray-400 mt-3 '>{course?.courseOutput?.Description}</p>
                 <h2 className='font-medium mt-2 flex gap-2 items-center text-primary'><HiOutlineRectangleStack />{course?.category}</h2>
-                 {!edit &&<Link href={'/course/'+course?.courseId+"/start"}>
+                 {!edit &&<a href={'/course/'+course?.courseId+"/start"} target='_blank'>
 
                    <Button className="w-full mt-5">Start</Button>
-                 </Link>}
+                 </a>}
            
             </div>
             <div>
