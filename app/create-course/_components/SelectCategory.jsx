@@ -23,7 +23,7 @@ function SelectCategory () {
                         cursor-pointer ${userCourseInput?.category==item.name&&'border-[oklch(45.7%_0.24_277.023)] bg-blue-50'}`}
                             onClick={() => handleCategoryChange(item.name)}
                             >
-                                                <Image src={item.icons} width={50} height={50} />
+                                                <Image src={item.icons} alt="icons..." width={50} height={50} />
                                                 <h2>{item.name}</h2>
                                         </div>
                                 ))}

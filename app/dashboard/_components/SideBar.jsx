@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Progress } from "@/components/ui/progress";
 import { UserCourseListContext } from '@/app/_context/UserCourseListContext';
-import { BsFillSuitcaseLgFill } from "react-icons/bs";
+// import { BsFillSuitcaseLgFill } from "react-icons/bs";
 
 const SideBar = () => {
   const { userCourseList } = useContext(UserCourseListContext);
@@ -45,7 +45,7 @@ const SideBar = () => {
 
   return (
     <div className="fixed h-full md:w-64 p-5 shadow-md">
-      <Image alt="placeholder"  src={'/logo.svg'} width={160} height={100} />
+      <Image alt="placeholder"  src={'/sLOGO.png'} width={160} height={100} />
       <hr className="my-5" />
       <ul>
         {Menu.map((item) => (

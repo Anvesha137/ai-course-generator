@@ -9,6 +9,7 @@ import { CourseList } from '@/config/schema';
 import { eq } from 'drizzle-orm';
 import Link from 'next/link';
 import EditCOurseBasicInfor from './EditCourseBasicInfor';
+
 function CourseBasicInfo({course,refreshData,edit=true}) {
 
   const [selectedFile,setSelectedFile]=useState();
@@ -46,13 +47,15 @@ function CourseBasicInfo({course,refreshData,edit=true}) {
 
   }
 
+  console.log('some-course',course)
+
   return (
     <div className='p-10 border rounded-xl shadow-sm mt-5 relative'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
             <div>
-                <h2 className='font-bold text-3xl'>{course?.courseOutput?.course?.name} 
+                <h2 className='font-bold text-3xl'>{course?.courseOutput?.CourseName} 
                {edit && <EditCOurseBasicInfor course={course} refreshData={()=>refreshData(true)} />} </h2>
-                <p className='text-sm text-gray-400 mt-3 '>{course?.courseOutput?.course?.description}</p>
+                <p className='text-sm text-gray-400 mt-3 '>{course?.courseOutput?.Description}</p>
                 <h2 className='font-medium mt-2 flex gap-2 items-center text-primary'><HiOutlineRectangleStack />{course?.category}</h2>
                  {!edit &&<Link href={'/course/'+course?.courseId+"/start"}>
 

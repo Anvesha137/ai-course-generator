@@ -1,6 +1,7 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import ReactMarkdown from 'react-markdown';
+
 const opts = {
     height: '390',
     width: '640',
@@ -13,8 +14,8 @@ function ChapterContent({chapter,content}) {
     
   return (
     <div className='p-10'>
-        <h2 className='font-medium text-2xl'>{chapter?.name}</h2>
-        <p className='text-gray-500'>{chapter?.about}</p>
+        <h2 className='font-medium text-2xl'>{chapter?.ChapterName}</h2>
+        <p className='text-gray-500'>{chapter?.About}</p>
         
         {/* Video  */}
         <div className='flex justify-center my-6'>

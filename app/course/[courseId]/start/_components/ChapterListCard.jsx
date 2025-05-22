@@ -8,8 +8,8 @@ function ChapterListCard({chapter,index}) {
              text-white rounded-full text-center'>{index+1}</h2>
         </div>
         <div className='col-span-4'>
-            <h2 className='font-medium'>{chapter?.name}</h2>
-            <h2 className='flex items-center gap-2 tex-sm text-primary'> <HiOutlineClock/> {chapter?.duration}</h2>
+            <h2 className='font-medium'>{chapter?.ChapterName}</h2>
+            <h2 className='flex items-center gap-2 tex-sm text-primary'> <HiOutlineClock/> {chapter?.Duration}</h2>
         </div>
     </div>
   )
