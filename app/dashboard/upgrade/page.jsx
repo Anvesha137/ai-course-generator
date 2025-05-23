@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { Button } from "@/components/ui/button";
 
-const page = () => {
+const UpgradePage = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <h1>Upgrade Your Plan</h1>
+      <p>Unlock premium features by upgrading your subscription.</p>
+      <Button>Upgrade Now</Button>
+    </div>
+  );
+};
 
-export default page
+export default UpgradePage;
