@@ -43,7 +43,7 @@ const CourseLayout = ({ params }) => {
 
   const GenerateChapterContent = async () => {
     setLoading(true);
-    const chapters = course?.courseOutput?.Chapters;
+    const chapters = course?.courseOutput?.course?.chapters;
 
     if (!chapters || chapters.length === 0) {
       console.error("No chapters found in the course.");
@@ -55,14 +55,14 @@ const CourseLayout = ({ params }) => {
       const Chapter = chapters[index];
       
 
-      const PROMPT = `Explain the concept in detail on Topic: ${course?.name}, Chapter: ${Chapter?.ChapterName} in JSON format as follows:\n{\n  \"Topic\": \"${course?.name}\",\n  \"Chapter\": \"${Chapter?.ChapterName}\",\n  \"Details\": [\n    {\n      \"title\": \"...\",\n      \"description\": \"...\",\n      \"CodeExample\": null or \"<precode>...code...</precode>\"\n    },\n    ...\n  ]\n}`;
+      const PROMPT='Explain the concept in Detail on Topic:'+course?.name+', Chapter:'+Chapter?.name+', in JSON Format with list of array with field as title, description in detail, Code Example(Code field in <precode> format) if applicable';
       console.log(PROMPT);
  
       if (index < chapters.length) {
         try {
           // Generate video
           let videoId = null;
-            const videoResponse = await service.getVideos(`${course?.name}:${Chapter?.ChapterName}`);
+            const videoResponse = await service.getVideos(`${course?.name}:${Chapter?.name}`);
             videoId = videoResponse[0]?.id?.videoId;
             console.log(videoResponse);
 

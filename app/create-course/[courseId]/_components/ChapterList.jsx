@@ -8,7 +8,7 @@ function ChapterList({ course, refreshData}) {
         <div className="mt-3">
             <h2 className="text-left font-medium text-xl">Chapters</h2>
             <div className="mt-2 flex flex-col items-start">
-                {course?.courseOutput?.Chapters?.map((Chapter, index) => (
+                {course?.courseOutput?.course?.chapters?.map((Chapter, index) => (
                     <div className='border p-5 rounded-lg shadow-md mb-4 w-full flex items-center justify-between' key={index}>
                         <div className="flex items-center gap-2">
                             <h2
@@ -18,15 +18,15 @@ function ChapterList({ course, refreshData}) {
                                 {index + 1}
                             </h2>
                             <div className="flex flex-col">
-                                <h2 className="font-medium text-lg">{Chapter?.ChapterName}  
+                                <h2 className="font-medium text-lg">{Chapter?.name}  
                                         <EditChapters course={course} index={index} refreshData={refreshData}/> </h2>
-                                <p className="text-md text-gray-600">{Chapter?.About || Chapter?.about}</p>
+                                <p className="text-md text-gray-600">{ Chapter?.about}</p>
                                 <p
                                     className="flex gap-2 items-center text-sm"
                                     style={{ color: 'oklch(45.7% .24 277.023)' }}
                                 >
                                     <HiMiniClock />
-                                    {Chapter?.Duration}
+                                    {Chapter?.duration}
                                 </p>
                             </div>
                         </div>

@@ -59,11 +59,11 @@ function CourseStart({ params }) {
           className="font-medium text-lg bg-primary p-4
             text-white"
         >
-          {course?.courseOutput?.CourseName}
+          {course?.courseOutput?.name}
         </h2>
 
         <div>
-          {course?.courseOutput?.Chapters.map((chapter, index) => (
+          {course?.courseOutput?.course?.chapters?.map((chapter, index) => (
             <div
               key={index}
               className={`cursor-pointer

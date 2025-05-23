@@ -15,7 +15,7 @@ function ChapterContent({ chapter, content }) {
 
   return (
     <div className="p-10">
-      <h2 className="font-medium text-2xl">{chapter?.ChapterName}</h2>
+      <h2 className="font-medium text-2xl">{chapter?.name}</h2>
       <p className="text-gray-500">{chapter?.about}</p>
 
       {/* Video  */}
@@ -24,18 +24,18 @@ function ChapterContent({ chapter, content }) {
       </div>
 
       <div>
-        {content?.content?.Details?.map((item, index) => (
+        {/* {content?.content?.chapters?.map((item, index) => ( */}
           <div className="p-5 bg-purple-50 shadow-sm mb-3 rounded-lg">
-            <h2 className="font-medium text-2xl">{item?.title}</h2>
-            <p className="whitespace-pre-wrap">{item?.description}</p>
+            <h2 className="font-medium text-2xl">{content?.content?.title}</h2>
+            <p className="whitespace-pre-wrap">{content?.content?.description}</p>
             {/* <ReactMarkdown className="text-lg text-black leading-9">
               {item?.description}
             </ReactMarkdown> */}
-            {item.codeExample && (
+            {content?.content?.codeExample && (
               <div className="p-4 bg-black text-white rounded-md mt-3">
                 <pre>
                   <code>
-                    {item.codeExample
+                    {content?.content?.codeExample
                       .replace("<precode>", "")
                       .replace("</precode>", "")}
                   </code>
@@ -43,7 +43,7 @@ function ChapterContent({ chapter, content }) {
               </div>
             )}
           </div>
-        ))}
+        {/* ))} */}
       </div>
 
       {/* Content  */}

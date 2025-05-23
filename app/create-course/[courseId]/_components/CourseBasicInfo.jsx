@@ -53,9 +53,9 @@ function CourseBasicInfo({course,refreshData,edit=true}) {
     <div className='p-10 border rounded-xl shadow-sm mt-5 relative'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
             <div>
-                <h2 className='font-bold text-3xl'>{course?.courseOutput?.CourseName} 
+                <h2 className='font-bold text-3xl'>{course?.courseOutput?.course?.name} 
                {edit && <EditCOurseBasicInfor course={course} refreshData={()=>refreshData(true)} />} </h2>
-                <p className='text-sm text-gray-400 mt-3 '>{course?.courseOutput?.Description}</p>
+                <p className='text-sm text-gray-400 mt-3 '>{course?.courseOutput?.course?.description}</p>
                 <h2 className='font-medium mt-2 flex gap-2 items-center text-primary'><HiOutlineRectangleStack />{course?.category}</h2>
                  {!edit &&<a href={'/course/'+course?.courseId+"/start"} target='_blank'>
 

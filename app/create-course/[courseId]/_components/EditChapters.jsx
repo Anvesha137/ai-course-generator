@@ -10,7 +10,7 @@ import {eq} from 'drizzle-orm';
 
 function EditChapters  ({course,index, refreshData})   {
 
-    const Chapters=course?.courseOutput?.Chapters;
+    const Chapters=course?.courseOutput?.course?.chapters;
     const [ChapterName, setChapterName]=React.useState();
     const [About, setAbout]=React.useState();
 
@@ -20,8 +20,8 @@ function EditChapters  ({course,index, refreshData})   {
     },[course])
     const onUpdateHandler=async()=>{
 
-      course.courseOutput.Chapters[index].ChapterName=ChapterName;
-      course.courseOutput.Chapters[index].About=About;
+      course.courseOutput.course.chapters[index].name=ChapterName;
+      course.courseOutput.course.chapters[index].about=About;
 
       const result = await db.update(CourseList).set({
                   courseOutput: course?.courseOutput
@@ -39,14 +39,14 @@ function EditChapters  ({course,index, refreshData})   {
       <DialogDescription>
          <div className='mt-3'>
             <label >Course Title</label>
-            <Input defaultValue={Chapters[index].ChapterName}
+            <Input defaultValue={Chapters[index].name}
             onChange={(event)=>setChapterName(event?.target.value)}
             />
 
         </div>
         <div>
             <label >Course Description</label>
-            <Textarea defaultValue={Chapters[index].About}
+            <Textarea defaultValue={Chapters[index].about}
             onChange={(event)=>setAbout(event?.target.value)}/>
         </div>
       </DialogDescription>
