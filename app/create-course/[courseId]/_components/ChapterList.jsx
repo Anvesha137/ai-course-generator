@@ -20,7 +20,7 @@ function ChapterList({ course, refreshData}) {
                             <div className="flex flex-col">
                                 <h2 className="font-medium text-lg">{Chapter?.ChapterName}  
                                         <EditChapters course={course} index={index} refreshData={refreshData}/> </h2>
-                                <p className="text-md text-gray-600">{Chapter?.About}</p>
+                                <p className="text-md text-gray-600">{Chapter?.About || Chapter?.about}</p>
                                 <p
                                     className="flex gap-2 items-center text-sm"
                                     style={{ color: 'oklch(45.7% .24 277.023)' }}

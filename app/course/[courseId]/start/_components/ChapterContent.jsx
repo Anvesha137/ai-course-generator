@@ -16,7 +16,7 @@ function ChapterContent({ chapter, content }) {
   return (
     <div className="p-10">
       <h2 className="font-medium text-2xl">{chapter?.ChapterName}</h2>
-      <p className="text-gray-500">{chapter?.About}</p>
+      <p className="text-gray-500">{chapter?.about}</p>
 
       {/* Video  */}
       <div className="flex justify-center my-6">
