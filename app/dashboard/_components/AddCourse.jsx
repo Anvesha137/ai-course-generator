@@ -15,7 +15,7 @@ const AddCourse = () => {
             <p className='text-sm text-gray-500'>Create new course with AI, Share with friends and Earn from it</p>
         </div>
         <Link href={userCourseList?.length>=5 ?'/dashboard/upgrade':'/create-course'}>
-            <Button>+ Create AI Course</Button>
+            <Button className="hover:cursor-pointer" style={{ backgroundColor: 'oklch(45.7% .24 277.023)' }}>+ Create AI Course</Button>
         </Link>
     </div>
   )
