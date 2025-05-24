@@ -59,7 +59,7 @@ function CourseStart({ params }) {
           className="font-medium text-lg bg-primary p-4
             text-white"
         >
-          {course?.courseOutput?.name}
+          {course?.courseOutput?.course?.name}
         </h2>
 
         <div>
@@ -69,17 +69,18 @@ function CourseStart({ params }) {
               className={`cursor-pointer
                     hover:bg-purple-50
                     ${selectedChapter === index && "bg-purple-100"}
-                    `}
+                    `} style={{ color: 'oklch(45.7% .24 277.023)' }}
               onClick={() => {
                 setSelectedChapter(index);
                 GetSelectedChapterContent(index);
               }}
             >
-              <ChapterListCard chapter={chapter} index={index} />
+              <ChapterListCard  chapter={chapter} index={index} />
             </div>
           ))}
         </div>
       </div>
+
       {/* Content Div  */}
       <div className="md:ml-72">
         <ChapterContent chapter={selectedChapter} content={chapterContent} />

@@ -69,7 +69,9 @@ const CourseLayout = ({ params }) => {
           // Generate chapter content
           const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
           const content = JSON.parse(result?.response?.text());
-     
+
+          console.log("Generated content:", content);
+          
           const resp = await db.insert(Chapters).values([{
             chapterId: index,
             courseId: course?.courseId,
