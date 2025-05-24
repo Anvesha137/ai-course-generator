@@ -51,53 +51,55 @@ const CourseLayout = ({ params }) => {
       return;
     }
 
-    for (let index = 0; index < chapters.length; index++) {
-      const Chapter = chapters[index];
-      
-
-      const PROMPT='Explain the concept in Detail on Topic:'+course?.name+', Chapter:'+Chapter?.name+', in JSON Format with list of array with field as title, description in detail, Code Example(Code field in <precode> format) if applicable';
+    // Run all async operations in parallel and collect values
+    const chapterValuesPromises = chapters.map(async (Chapter, index) => {
+      const PROMPT = 'Explain the concept in Detail on Topic:' + course?.name + ', Chapter:' + Chapter?.name + ', in JSON Format with list of array with field as title, description in detail, Code Example(Code field in <precode> format) if applicable';
       console.log(PROMPT);
- 
-      if (index < chapters.length) {
-        try {
-          // Generate video
-          let videoId = null;
-            const videoResponse = await service.getVideos(`${course?.name}:${Chapter?.name}`);
-            videoId = videoResponse[0]?.id?.videoId;
-            console.log(videoResponse);
+      try {
+        // Generate video
+        let videoId = null;
+        const videoResponse = await service.getVideos(`${course?.name}:${Chapter?.name}`);
+        videoId = videoResponse[0]?.id?.videoId;
+        console.log(videoResponse);
 
-          // Generate chapter content
-          const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
-          const content = JSON.parse(result?.response?.text());
+        // Generate chapter content
+        const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
+        const content = JSON.parse(result?.response?.text());
+        console.log("Generated content:", content);
 
-          console.log("Generated content:", content);
-          
-          const resp = await db.insert(Chapters).values([{
-            chapterId: index,
-            courseId: course?.courseId,
-            content: content,
-            videoId: videoId,
-          }])  
-
-          
-          console.log("resp",resp);
-        } catch (e) {
-          console.error("Error generating chapter content:", e);
-        }
+        return {
+          chapterId: index,
+          courseId: course?.courseId,
+          content: content,
+          videoId: videoId,
+        };
+      } catch (e) {
+        console.error("Error generating chapter content:", e);
+        return null;
       }
+    });
 
-      // Update course publish status
-      if (index === chapters.length - 1) {
-        try {
-          await db.update(CourseList).set({
-            publish: true,
-          }).where(eq(CourseList.courseId, course?.courseId));
+    // Wait for all values to be ready
+    const chapterValues = (await Promise.all(chapterValuesPromises)).filter(Boolean);
 
-          router.replace(`/create-course/${course?.courseId}/finish`);
-        } catch (e) {
-          console.error("Error updating course publish status:", e);
-        }
+    // Insert all chapters at once
+    if (chapterValues.length > 0) {
+      try {
+        const resp = await db.insert(Chapters).values(chapterValues);
+        console.log("Bulk insert resp", resp);
+      } catch (e) {
+        console.error("Error in bulk insert:", e);
       }
+    }
+
+    // Update course publish status after all chapters are processed
+    try {
+      await db.update(CourseList).set({
+        publish: true,
+      }).where(eq(CourseList.courseId, course?.courseId));
+      router.replace(`/create-course/${course?.courseId}/finish`);
+    } catch (e) {
+      console.error("Error updating course publish status:", e);
     }
 
     setLoading(false);
