@@ -19,5 +19,5 @@ Installation
 3. pip install -r requirements.txt
 
 
-
+Vercel - https://know-val.vercel.app/
 
