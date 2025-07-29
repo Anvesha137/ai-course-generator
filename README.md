@@ -56,7 +56,7 @@
 
 ## 📸 Demo
 
-> Live Demo: _Coming Soon_
+> Live Demo: https://know-val.vercel.app/
 
 ---
 
